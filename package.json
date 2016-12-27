@@ -4,6 +4,7 @@
   "description": "Redis Cloud Node.js Sample",
   "main": "web.js",
   "scripts": {
+    "preinstall": "npm i -g node-inspector",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
