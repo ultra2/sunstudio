@@ -1,3 +1,3 @@
-web: node --debug=8082 web.js
-webDebug: node-inspector --web-port=$PORT --web-host=$IP --debug-port=8082
+web: node --debug web.js
+webDebug: node-inspector --web-port $PORT --web-host $IP
 webInspect: node --inspect=$PORT --debug-brk web.js
