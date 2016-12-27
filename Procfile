@@ -1,3 +1,3 @@
-web: node --debug web.js
+web: cf-node-debug -- web.js
 webDebug: node-inspector --web-port $PORT --web-host $IP
 webInspect: node --inspect=$PORT --debug-brk web.js
