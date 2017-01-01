@@ -62,7 +62,7 @@ var ProxyDebug = httpProxy.createProxyServer({
   ws: true
 })
 
-app.use(ProxyDebug.web.bind(ProxyDebug));
+app.use(ProxyDebug.ws.bind(ProxyDebug));
 
 app.listen(port, function() {
   console.log("Listening on hello " + port);
