@@ -55,6 +55,14 @@ app.get('/command', function(req, res) {
 });
 
 var port = Number(process.env.PORT || 5000);
+
+
+httpProxy.createServer({
+  target: 'ws://localhost:9229',
+  ws: true
+}).listen(port);
+
+
 app.listen(port, function() {
   console.log("Listening on hello " + port);
 });
