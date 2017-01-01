@@ -3,22 +3,35 @@ var logfmt = require("logfmt");
 var url = require('url');
 var redis = require('redis');
 var httpProxy = require('http-proxy');
+var proxy = require('express-http-proxy');
 
-var redisURL = url.parse(process.env.REDISCLOUD_URL);
-var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
-client.auth(redisURL.auth.split(":")[1]);
+//var redisURL = url.parse(process.env.REDISCLOUD_URL);
+//var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+//client.auth(redisURL.auth.split(":")[1]);
 
 var port = Number(process.env.PORT || 5000);
 
 
 var ProxyDebug = httpProxy.createProxyServer({
-  target: 'ws://localhost:9229',
+  target: {
+    host: 'localhost',
+    port: 9229
+  },
+  //target: 'ws://localhost:9229',
   ws: true
 })
 
 var app = express();
 
-app.use(ProxyDebug.ws.bind(ProxyDebug));
+//app.use('/debug', ProxyDebug.ws.bind(ProxyDebug));
+
+app.use('/debug', proxy('ws://localhost:9229', {
+  filter: function(req, res) {
+     console.log(req.protocol)
+     return true
+  }
+}));
+
 
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
