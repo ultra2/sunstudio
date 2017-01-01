@@ -14,7 +14,7 @@
   "keywords": [
     "node",
     "express",
-    "redis"    
+    "redis"
   ],
   "author": "Redis Labs",
   "license": "GPL",
@@ -22,10 +22,10 @@
     "url": "https://github.com/RedisLabs/rediscloud-node-sample/issues"
   },
   "dependencies": {
-    "cf-node-debug": "^0.1.2",
-    "redis": "^0.12.1",
+    "ejs": "^1.0.0",
     "express": "^4.8.3",
+    "http-proxy": "^1.16.2",
     "logfmt": "^1.1.2",
-    "ejs": "^1.0.0"
+    "redis": "^0.12.1"
   }
 }
