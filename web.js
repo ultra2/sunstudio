@@ -8,7 +8,18 @@ var redisURL = url.parse(process.env.REDISCLOUD_URL);
 var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 client.auth(redisURL.auth.split(":")[1]);
 
+var port = Number(process.env.PORT || 5000);
+
+
+var ProxyDebug = httpProxy.createProxyServer({
+  target: 'ws://localhost:9229',
+  ws: true
+})
+
 var app = express();
+
+app.use(ProxyDebug.ws.bind(ProxyDebug));
+
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.engine('html', require('ejs').renderFile);
@@ -53,16 +64,6 @@ app.get('/command', function(req, res) {
       res.send("");
   }
 });
-
-var port = Number(process.env.PORT || 5000);
-
-
-var ProxyDebug = httpProxy.createProxyServer({
-  target: 'ws://localhost:9229',
-  ws: true
-})
-
-app.use(ProxyDebug.ws.bind(ProxyDebug));
 
 app.listen(port, function() {
   console.log("Listening on hello " + port);
