@@ -30,6 +30,10 @@
     "http-proxy": "^1.16.2",
     "logfmt": "^1.1.2",
     "logops": "^1.0.7",
-    "redis": "^0.12.1"
+    "redis": "^0.12.1",
+    "request": "^2.79.0",
+    "socket.io": "^1.7.2",
+    "socket.io-client": "^1.7.2",
+    "websocket": "^1.0.24"
   }
 }

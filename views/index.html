@@ -125,11 +125,18 @@
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
   <script type="text/javascript">
-    function getResponse( command ) {
-      
-      $( "#response" ).load( "/command?a=" + command);
+    function getResponseWS() {
+      var socket = io();
+      socket.emit('message', 'izs');
+      socket.on("message", function(data){
+        document.getElementById("response").innerHTML = data
+      })
    }	
+   function getResponseHttp() {
+       $( "#response" ).load( "/command?a=eee");
+   }
    </script>
  </head>
 <body>
@@ -151,11 +158,8 @@
 </h1>
 
   <h2>Actions</h2>
-  hellojozsi2
-  <a id="set-command" href="#" onclick="getResponse('set');return false;">Click here to <b>set</b> a key in Redis Cloud</a><br /><br />
-  <a id="get-command" href="#" onclick="getResponse('get');return false;">Click here to <b>get</b> a key from Redis Cloud</a><br /><br />
-  <a id="info-command" href="#" onclick="getResponse('info');return false;">Click here to get<b> info</b> about your Redis Cloud DB</a><br /><br />
-  <a id="flush-command" href="#" onclick="getResponse('flush');return false;">Click here to <b> flushall</b> your Redis Cloud DB</a><br /><br />
+    <a id="set-command" href="#" onclick="getResponseWS();return false;">Click here to send WS message</a><br /><br />
+    <a id="get-command" href="#" onclick="getResponseHttp();return false;">Click here to send Http message</a><br /><br />
 
   <h2>Response</h2>
 
@@ -165,13 +169,4 @@
    </p>
   </div>
 
-  <h2>
-    What's next?
-  </h2>
-  <ul>
-    <li>
-      Learn more at <a href="http://redislabs.com/redis-cloud" target="_blank">Redis Cloud</a>
-    </li>
-  </ul>
-</body>
 </html>
